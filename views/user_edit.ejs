@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+  <title><%= title %></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+ 
+<div class="container">
+  <h2><%= title %></h2>
+  <form action="/update" method="post">
+    <input type="hidden" value="<%= Player.id %>" name="id">
+    <div class="form-group">
+      <label for="KN">Kit Number:</label>
+      <input type="number" class="form-control" placeholder="Enter Name" value="<%= Player.KN %>" name="KN" required>
+    </div>
+    <div class="form-group">
+      <label for="PN">Player Name:</label>
+      <input type="text" class="form-control" placeholder="Enter Name" value="<%= Player.PN %>" name="PN" required>
+    </div>
+    <div class="form-group">
+      <label for="DOB">Date of Birth:</label>
+      <input type="date" class="form-control" id="pwd" placeholder="Enter Date of birth" value="<%= Player.DOB %>" name="DOB" required>
+    </div>
+    <div class="form-group">
+        <label for="Location">Location:</label>
+        <input type="text" class="form-control" id="pwd" placeholder="Enter LOcation" value="<%= Player.Location %>" name="Location" required>
+      </div>
+      <div class="form-group">
+        <label for="MP">Matches Played:</label>
+        <input type="number" class="form-control" id="pwd" placeholder="Enter Matches Played" value="<%= Player.MP %>" name="MP" required>
+      </div>
+      <div class="form-group">
+        <label for="GS">Goals Scored</label>
+        <input type="number" class="form-control" id="pwd" placeholder="Enter Goals Scored" value="<%= Player.GS %>" name="GS" required>
+      </div>
+      <div class="form-group">
+        <label for="ASI">Assists</label>
+        <input type="number" class="form-control" id="pwd" placeholder="Enter Assists" value="<%= Player.ASI %>" name="ASI" required>
+      </div>
+   
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+ 
+</body>
+</html>
