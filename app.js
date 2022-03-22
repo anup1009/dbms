@@ -72,7 +72,7 @@ app.get('/edit/:Playerid',(req, res) => {
 
 app.post('/update',(req, res) => {
     const Playerid = req.body.id;
-    let sql = `update pltb SET KN='"+req.body.KN+"',  PN='"+req.body.PN+"',    Location='"+req.body.Location+"',  MP='"+req.body.MP+"',  GS='"+req.body.GS+"',  ASI='"+req.body.ASI+"' where id =${Playerid}`;
+    let sql = `update pltb SET KN=`+req.body.KN+`,  PN='${req.body.PN}',    Location='${req.body.Location}',  MP=`+req.body.MP+`,  GS=`+req.body.GS+`,  ASI=`+req.body.ASI+` where id =${Playerid}`;
     let query = connection.query(sql,(err, results) => {
       if(err) throw err;
       res.redirect('/');
