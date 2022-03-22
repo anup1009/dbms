@@ -27,6 +27,9 @@ app.set('view engine','ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'static')));
 
 app.get('/',(req,res)=>{
     // res.send('CRUD operation')
@@ -34,7 +37,7 @@ app.get('/',(req,res)=>{
     let query = connection.query(sql,(err,rows)=>{
         if(err) throw err;
         res.render('user_index',{
-            title:'CRUD operations',
+            title:'',
             pltb: rows
         })
     })
@@ -55,21 +58,21 @@ app.post('/save',(req, res) => {
       res.redirect('/');
     });
 });
-app.get('/edit/:PlayerId',(req, res) => {
-    const PlayerId = req.params.PlayerId;
-    let sql = `Select * from pltb where id = ${PlayerId}`;
+app.get('/edit/:Playerid',(req, res) => {
+    const Playerid = req.params.Playerid;
+    let sql = `Select * from pltb where id = ${Playerid}`;
     let query = connection.query(sql,(err, result) => {
         if(err) throw err;
         res.render('user_edit', {
-            title : 'CRUD Operation using NodeJS / ExpressJS / MySQL',
+            title : 'Editing a Player',
             Player : result[0]
         });
     });
 });
 
 app.post('/update',(req, res) => {
-    const PlayerId = req.body.id;
-    let sql = "update pltb SET KN='"+req.body.KN+"',  PN='"+req.body.PN+"',  DOB='"+req.body.DOB+"',  Location='"+req.body.Location+"',  MP='"+req.body.MP+"',  GS='"+req.body.GS+"',  ASI='"+req.body.ASI+"' where id ="+PlayerId;
+    const Playerid = req.params.id;
+    let sql = `update pltb SET KN='"+req.params.KN+"',  PN='"+req.params.PN+"',    Location='"+req.params.Location+"',  MP='"+req.params.MP+"',  GS='"+req.params.GS+"',  ASI='"+req.params.ASI+"' where id =${Playerid}`;
     let query = connection.query(sql,(err, results) => {
       if(err) throw err;
       res.redirect('/');
@@ -77,14 +80,30 @@ app.post('/update',(req, res) => {
 
 });
 
-app.get('/delete/:PlayerId',(req, res) => {
-    const PlayerId = req.params.PlayerId;
-    let sql = `DELETE from pltb where id = ${PlayerId}`;
+app.get('/delete/:Playerid',(req, res) => {
+    const Playerid = req.params.Playerid;
+    let sql = `DELETE fROM team.pltb WHERE id = ${Playerid}`;
     let query = connection.query(sql,(err, result) => {
         if(err) throw err;
         res.redirect('/');
     });
 });
+
+
+// http://localhost:3000/home
+app.get('/', function(request, response) {
+	// If the user is loggedin
+	if (request.session.loggedin) {
+		// Output username
+		response.send('Welcome back, ' + request.session.username + '!');
+	} else {
+		// Not logged in
+		response.send('Please login to view this page!');
+	}
+	response.end();
+});
+
+
 app.listen(3000,()=>{
     console.log('server is running at port 3000');
 });

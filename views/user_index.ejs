@@ -3,18 +3,19 @@
         
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
     <body>
         <h1>
-            Hello
+            Team Management
         </h1>
 
         <div class="conatiner">
-            <h2><%=title %></h2>
-            <button class="btn btn-success"><a href="/add">Add a Player</a></button>
+            <h2>This is the list of players</h2>
+            
             <table class="table table-dark table-striped">
                 <thead>
                     <tr>
@@ -38,14 +39,14 @@
                         <td><%= Player.GS %></td>
                         <td><%= Player.ASI %></td>
                         <td>
-                        <button class="btn btn-sm btn-primary"><a href="/edit/<%= Player.id %>">Edit</a></button>
+                        <button class="btn btn-sm btn-danger"><a href="/edit/<%= Player.id %>">Edit</a></button>
                         <button class="btn btn-sm btn-danger"><a href="/delete/<%= Player.id %>">Delete</a></button>
                         </td>
                     </tr>
                     <% }) %>
                 </tbody>
             </table>
-
+            <button class="btn btn-success"><a href="/add">Add a Player</a></button>
         </div>
     </body>
 </html>
