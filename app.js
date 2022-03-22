@@ -51,7 +51,7 @@ app.get('/add',(req, res) => {
 });
  
 app.post('/save',(req, res) => { 
-    let data = {id: shortid.generate(), KN: req.body.KN, PN: req.body.PN, DOB: req.body.DOB, Location: req.body.Location};
+    let data = { KN: req.body.KN, PN: req.body.PN, DOB: req.body.DOB, Location: req.body.Location};
     let sql = "INSERT INTO pltb SET ?";
     let query = connection.query(sql, data,(err, results) => {
       if(err) throw err;
@@ -71,8 +71,8 @@ app.get('/edit/:Playerid',(req, res) => {
 });
 
 app.post('/update',(req, res) => {
-    const Playerid = req.params.id;
-    let sql = `update pltb SET KN='"+req.params.KN+"',  PN='"+req.params.PN+"',    Location='"+req.params.Location+"',  MP='"+req.params.MP+"',  GS='"+req.params.GS+"',  ASI='"+req.params.ASI+"' where id =${Playerid}`;
+    const Playerid = req.body.id;
+    let sql = `update pltb SET KN='"+req.body.KN+"',  PN='"+req.body.PN+"',    Location='"+req.body.Location+"',  MP='"+req.body.MP+"',  GS='"+req.body.GS+"',  ASI='"+req.body.ASI+"' where id =${Playerid}`;
     let query = connection.query(sql,(err, results) => {
       if(err) throw err;
       res.redirect('/');
